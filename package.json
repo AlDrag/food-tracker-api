@@ -1,0 +1,31 @@
+{
+  "name": "food-tracker-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "knex": "^0.14.2",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
+    "pg": "^7.4.1",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^5.0.0"
+  },
+  "scripts": {
+    "start": "node --use-strict ./app/app.js",
+    "test": "mocha tests/",
+    "knex-cli": "node_modules/knex/bin/cli.js",
+    "migrations": "npm run knex-cli -- migrate:latest"
+  },
+  "engines": {
+    "node": ">= 8.7.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
