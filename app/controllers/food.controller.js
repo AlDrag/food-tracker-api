@@ -23,7 +23,6 @@ const get = async ctx => {
       data: food
     };
   } catch (error) {
-    console.error(error);
     ctx.status = 404;
     ctx.body = {
         error: error.message
@@ -31,4 +30,22 @@ const get = async ctx => {
   }
 };
 
-module.exports = { index, get };
+const post = async ctx => {
+  try {
+    const food = await knex("food").returning('*').insert(ctx.request.body);
+    if (!food.length) {
+      throw new Error("The requested resource failed to create");
+    }
+    ctx.status = 201;
+    ctx.body = {
+      data: food
+    };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = {
+        error: error.message
+    }
+  }
+};
+
+module.exports = { index, get, post };

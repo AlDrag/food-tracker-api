@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     return knex.schema.createTable("food", table => {
         table.increments();
         table.string("barcode");
-        table.string("name").notNullable().unique();
+        table.string("name").notNullable();
       });
 };
 

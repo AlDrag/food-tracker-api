@@ -6,5 +6,6 @@ const foodController = require("./controllers/food.controller");
 
 router.get(`${BASE_URL_V1}/food`, foodController.index);
 router.get(`${BASE_URL_V1}/food/:id`, foodController.get);
+router.post(`${BASE_URL_V1}/food`, foodController.post);
 
 module.exports = router;

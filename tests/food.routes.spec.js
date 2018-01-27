@@ -71,5 +71,42 @@ describe("routes: food", () => {
         });
     });
   });
+
+  describe(`POST ${PATH}`, () => {
+    it("should create and return a single resource", done => {
+      chai
+        .request(server)
+        .post(`${PATH}`)
+        .send({
+          barcode: '0299418',
+          name: 'Frozen Peas'
+        })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res.status).to.equal(201);
+          expect(res.type).to.equal("application/json");
+          expect(res.body.data.length).to.equal(1);
+          expect(res.body.data[0]).to.have.property("barcode");
+          done();
+        });
+    });
+
+    it("should return an error a required parameter is missing", done => {
+      chai
+        .request(server)
+        .post(`${PATH}`)
+        .send({
+          barcode: '23420121'
+        })
+        .end((err, res) => {
+          expect(err).to.exist;
+          expect(res.status).to.equal(400);
+          expect(res.type).to.equal("application/json");
+          // TODO Check the error message.
+          // expect(res.body.error).to.equal("Missing a required parameter");
+          done();
+        });
+    });
+  });
 /** every subsequent test must be added here !! **/
 });
